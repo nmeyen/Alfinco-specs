@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Asciidoctor 1.5.4">
+  <title>SPEC-1: Alfinco Insurance Broker Digital Transformation</title>
+  <link rel="stylesheet" href="https://asciidoclive.com/assets/asciidoctor.js/css/asciidoctor.css">
+</head>
+
+<body class="article">
+  <div id="header">
+    <h1>SPEC-1: Alfinco Insurance Broker Digital Transformation</h1>
+    <div id="toc" class="toc">
+      <div id="toctitle">Table of Contents</div>
+      <ul class="sectlevel1">
+        <li><a href="#_background">1. Background</a></li>
+        <li><a href="#_requirements">2. Requirements</a>
+          <ul class="sectlevel2">
+            <li><a href="#_must_have">2.1. Must Have</a></li>
+            <li><a href="#_should_have">2.2. Should Have</a></li>
+            <li><a href="#_could_have">2.3. Could Have</a></li>
+            <li><a href="#_won_t_have">2.4. Won&#8217;t Have</a></li>
+          </ul>
+        </li>
+        <li><a href="#_method">3. Method</a>
+          <ul class="sectlevel2">
+            <li><a href="#_architecture_design">3.1. Architecture Design</a></li>
+            <li><a href="#_database_schema">3.2. Database Schema</a></li>
+            <li><a href="#_algorithms">3.3. Algorithms</a></li>
+          </ul>
+        </li>
+        <li><a href="#_implementation">4. Implementation</a>
+          <ul class="sectlevel2">
+            <li><a href="#_step_1_project_setup">4.1. Step 1: Project Setup</a></li>
+            <li><a href="#_step_2_design_and_development">4.2. Step 2: Design and Development</a></li>
+            <li><a href="#_step_3_integration_and_testing">4.3. Step 3: Integration and Testing</a></li>
+            <li><a href="#_step_4_deployment">4.4. Step 4: Deployment</a></li>
+            <li><a href="#_step_5_training_and_support">4.5. Step 5: Training and Support</a></li>
+          </ul>
+        </li>
+        <li><a href="#_gathering_results">6. Gathering Results</a>
+          <ul class="sectlevel2">
+            <li><a href="#_evaluation_metrics">6.1. Evaluation Metrics</a></li>
+            <li><a href="#_data_collection_methods">6.2. Data Collection Methods</a></li>
+            <li><a href="#_post_production_review">6.3. Post-Production Review</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="content">
+    <div class="sect1">
+      <h2 id="_background">1. Background</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>Alfinco, an established insurance broker, currently offers life insurance
+            and general insurance services. However, the existing application is
+            not scaling well to meet the growing demands. The aim is to automate
+            much of the offline process using cloud technologies, specifically focusing
+            on claims processing and insurance brokering. This digital transformation
+            seeks to enhance the customer experience and increase operational efficiency
+            by moving processes online and leveraging the scalability and flexibility
+            of the cloud.</p>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_requirements">2. Requirements</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>The following requirements are identified for the Alfinco digital transformation
+            project, categorized using the MoSCoW prioritization:</p>
+        </div>
+        <div class="sect2">
+          <h3 id="_must_have">2.1. Must Have</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p>Automated claims processing system</p>
+              </li>
+              <li>
+                <p>Online insurance brokering capabilities</p>
+              </li>
+              <li>
+                <p>Support for English, Sinhala, and Tamil languages</p>
+              </li>
+              <li>
+                <p>Scalable cloud-based architecture</p>
+              </li>
+              <li>
+                <p>Secure authentication and authorization mechanisms</p>
+              </li>
+              <li>
+                <p>User-friendly interface for customers</p>
+              </li>
+              <li>
+                <p>Integration with existing backend systems</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_should_have">2.2. Should Have</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p>Mobile application support for both iOS and Android</p>
+              </li>
+              <li>
+                <p>Real-time notifications and updates for customers</p>
+              </li>
+              <li>
+                <p>Advanced analytics and reporting features</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_could_have">2.3. Could Have</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p>Chatbot for customer support</p>
+              </li>
+              <li>
+                <p>AI-driven recommendations for insurance products</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_won_t_have">2.4. Won&#8217;t Have</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p>Support for insurance products not currently offered by Alfinco (e.g.,
+                  health insurance)</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_method">3. Method</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>To address the requirements, the following technical method and architecture
+            design are proposed.</p>
+        </div>
+        <div class="sect2">
+          <h3 id="_architecture_design">3.1. Architecture Design</h3>
+          <div class="paragraph">
+            <p>The application will be built on a scalable cloud-based architecture
+              using a microservices approach. This ensures scalability, maintainability,
+              and ease of integration with existing systems.</p>
+          </div>
+          <div class="paragraph">
+            <img src="Alfinco Diagram.jpg" alt="Alfinco Digital Platform Diagram">
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_database_schema">3.2. Database Schema</h3>
+          <div class="paragraph">
+            <p>The database will be designed to support the necessary operations efficiently,
+              using a combination of SQL and NoSQL databases for structured and unstructured
+              data.</p>
+          </div>
+          <div class="sect3">
+            <h4 id="_user_table">3.2.1. User Table</h4>
+            <table class="tableblock frame-all grid-all spread">
+              <colgroup>
+                <col style="width: 33.3333%;">
+                <col style="width: 33.3333%;">
+                <col style="width: 33.3334%;">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Column Name</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Data Type</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Description</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">ID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">UUID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Unique identifier for the user</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Name</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">String</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Full name of the user</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Email</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">String</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">User&#8217;s email address</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">PasswordHash</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">String</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Hashed password</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">LanguagePreference</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">String</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">User&#8217;s preferred language (English, Sinhala, Tamil)</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="sect3">
+            <h4 id="_claims_table">3.2.2. Claims Table</h4>
+            <table class="tableblock frame-all grid-all spread">
+              <colgroup>
+                <col style="width: 33.3333%;">
+                <col style="width: 33.3333%;">
+                <col style="width: 33.3334%;">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Column Name</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Data Type</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Description</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">ClaimID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">UUID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Unique identifier for the claim</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">UserID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">UUID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Reference to the user</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">PolicyID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">UUID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Reference to the insurance policy</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">ClaimDetails</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">JSON</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Detailed information about the claim</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Status</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">String</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Current status of the claim (e.g., Pending, Approved, Rejected)</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="sect3">
+            <h4 id="_policies_table">3.2.3. Policies Table</h4>
+            <table class="tableblock frame-all grid-all spread">
+              <colgroup>
+                <col style="width: 33.3333%;">
+                <col style="width: 33.3333%;">
+                <col style="width: 33.3334%;">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Column Name</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Data Type</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Description</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">PolicyID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">UUID</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Unique identifier for the policy</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">PolicyType</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">String</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Type of insurance policy (Life, General)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">PolicyDetails</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">JSON</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Detailed information about the policy</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Price</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Decimal</p>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                    <p class="tableblock">Price of the policy</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_algorithms">3.3. Algorithms</h3>
+          <div class="sect3">
+            <h4 id="_claims_processing_algorithm">3.3.1. Claims Processing Algorithm</h4>
+            <div class="olist arabic">
+              <ol class="arabic">
+                <li>
+                  <p>User submits a claim via the frontend.</p>
+                </li>
+                <li>
+                  <p>The claim is validated for completeness and correctness.</p>
+                </li>
+                <li>
+                  <p>The claim is assigned to an automated processing queue.</p>
+                </li>
+                <li>
+                  <p>An AI module reviews the claim for initial assessment.</p>
+                </li>
+                <li>
+                  <p>The claim is either automatically approved/rejected or flagged
+                    for manual review.</p>
+                </li>
+                <li>
+                  <p>The user is notified of the claim status in real-time.</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div class="sect3">
+            <h4 id="_insurance_brokering_algorithm">3.3.2. Insurance Brokering Algorithm</h4>
+            <div class="olist arabic">
+              <ol class="arabic">
+                <li>
+                  <p>User browses available insurance policies.</p>
+                </li>
+                <li>
+                  <p>The system provides personalized recommendations based on user
+                    profile and history.</p>
+                </li>
+                <li>
+                  <p>User selects and purchases a policy.</p>
+                </li>
+                <li>
+                  <p>The purchase details are synchronized with the backend system.</p>
+                </li>
+                <li>
+                  <p>The user receives a confirmation and policy documents via email.</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_implementation">4. Implementation</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>The implementation of the Alfinco digital transformation project involves
+            several key steps, focusing on developing the necessary features and
+            integrating them into a cohesive system.</p>
+        </div>
+        <div class="sect2">
+          <h3 id="_step_1_project_setup">4.1. Step 1: Project Setup</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p><strong>Define Project Scope and Plan</strong>: Finalize the project
+                  requirements and create a detailed project plan.</p>
+              </li>
+              <li>
+                <p><strong>Set Up Development Environment</strong>: Configure the development
+                  environment, including version control, CI/CD pipelines, and necessary
+                  tools.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_step_2_design_and_development">4.2. Step 2: Design and Development</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p><strong>Design UI/UX</strong>: Create wireframes and mockups for
+                  the user interface, ensuring a user-friendly experience across
+                  web and mobile platforms.</p>
+              </li>
+              <li>
+                <p><strong>Develop Frontend</strong>: Implement the frontend for web
+                  and mobile applications using modern frameworks (e.g., React, React
+                  Native).</p>
+              </li>
+              <li>
+                <p><strong>Develop Microservices</strong>: Build the backend services
+                  for authentication, claims processing, insurance brokering, notifications,
+                  and analytics using a microservices architecture.</p>
+              </li>
+              <li>
+                <p><strong>Integrate Language Support</strong>: Implement multilingual
+                  support for English, Sinhala, and Tamil.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_step_3_integration_and_testing">4.3. Step 3: Integration and Testing</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p><strong>Integrate with Existing Backend Systems</strong>: Ensure
+                  seamless data synchronization between new services and existing
+                  backend systems.</p>
+              </li>
+              <li>
+                <p><strong>Perform Unit and Integration Testing</strong>: Conduct comprehensive
+                  testing to ensure each component functions correctly and integrates
+                  smoothly.</p>
+              </li>
+              <li>
+                <p><strong>Conduct User Acceptance Testing (UAT)</strong>: Involve a
+                  group of end-users to validate the system&#8217;s functionality
+                  and usability.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_step_4_deployment">4.4. Step 4: Deployment</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p><strong>Set Up Cloud Infrastructure</strong>: Configure cloud infrastructure
+                  (e.g., AWS, Azure) to host the application and services.</p>
+              </li>
+              <li>
+                <p><strong>Deploy Services</strong>: Deploy the microservices, frontend
+                  applications, and supporting components to the cloud environment.</p>
+              </li>
+              <li>
+                <p><strong>Monitor and Optimize</strong>: Continuously monitor the system&#8217;s
+                  performance and make necessary optimizations for scalability and
+                  efficiency.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_step_5_training_and_support">4.5. Step 5: Training and Support</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p><strong>User Training</strong>: Provide training sessions and materials
+                  for users to familiarize them with the new system.</p>
+              </li>
+              <li>
+                <p><strong>Technical Support</strong>: Establish a support system to
+                  address any technical issues or user queries post-deployment.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_milestones">5. Milestones</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>The following milestones are defined to ensure the project stays on track
+            and meets its goals.</p>
+        </div>
+        <div class="sect2">
+          <h3 id="_milestone_1_project_initiation">5.1. Milestone 1: Project Initiation</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p><strong>Start Date</strong>: [Insert Start Date]</p>
+              </li>
+              <li>
+                <p><strong>End Date</strong>: [Insert End Date]</p>
+              </li>
+              <li>
+                <p><strong>Deliverables</strong>:</p>
+              </li>
+              <li>
+                <p>Project scope and plan</p>
+              </li>
+              <li>
+                <p>Development environment setup</p>
+              </li>
+              <li>
+                <p>Initial UI/UX wireframes and mockups</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_milestone_2_design_and_development">5.2. Milestone 2: Design and Development</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p><strong>Start Date</strong>: [Insert Start Date]</p>
+              </li>
+              <li>
+                <p><strong>End Date</strong>: [Insert End Date]</p>
+              </li>
+              <li>
+                <p><strong>Deliverables</strong>:</p>
+              </li>
+              <li>
+                <p>Completed frontend for web and mobile</p>
+              </li>
+              <li>
+                <p>Developed and tested microservices</p>
+              </li>
+              <li>
+                <p>Integrated language support</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_milestone_3_integration_and_testing">5.3. Milestone 3: Integration and Testing</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p><strong>Start Date</strong>: [Insert Start Date]</p>
+              </li>
+              <li>
+                <p><strong>End Date</strong>: [Insert End Date]</p>
+              </li>
+              <li>
+                <p><strong>Deliverables</strong>:</p>
+              </li>
+              <li>
+                <p>Integration with existing backend systems</p>
+              </li>
+              <li>
+                <p>Unit and integration testing reports</p>
+              </li>
+              <li>
+                <p>User acceptance testing (UAT) feedback</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_milestone_4_deployment">5.4. Milestone 4: Deployment</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p><strong>Start Date</strong>: [Insert Start Date]</p>
+              </li>
+              <li>
+                <p><strong>End Date</strong>: [Insert End Date]</p>
+              </li>
+              <li>
+                <p><strong>Deliverables</strong>:</p>
+              </li>
+              <li>
+                <p>Configured cloud infrastructure</p>
+              </li>
+              <li>
+                <p>Deployed services to the cloud</p>
+              </li>
+              <li>
+                <p>Monitoring and optimization reports</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_milestone_5_training_and_support">5.5. Milestone 5: Training and Support</h3>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p><strong>Start Date</strong>: [Insert Start Date]</p>
+              </li>
+              <li>
+                <p><strong>End Date</strong>: [Insert End Date]</p>
+              </li>
+              <li>
+                <p><strong>Deliverables</strong>:</p>
+              </li>
+              <li>
+                <p>User training sessions and materials</p>
+              </li>
+              <li>
+                <p>Established technical support system</p>
+              </li>
+              <li>
+                <p>Post-deployment review and feedback</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_gathering_results">6. Gathering Results</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>To evaluate whether the requirements have been properly addressed and to
+            assess the performance of the system post-production, the following methods
+            will be employed:</p>
+        </div>
+        <div class="sect2">
+          <h3 id="_evaluation_metrics">6.1. Evaluation Metrics</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p><strong>User Adoption Rate</strong>: Measure the number of users
+                  who have started using the new digital platform compared to the
+                  total customer base.</p>
+              </li>
+              <li>
+                <p><strong>Customer Satisfaction</strong>: Conduct surveys and collect
+                  feedback to gauge customer satisfaction with the new system.</p>
+              </li>
+              <li>
+                <p><strong>Operational Efficiency</strong>: Analyze the time and cost
+                  savings achieved through automation of claims processing and insurance
+                  brokering.</p>
+              </li>
+              <li>
+                <p><strong>System Performance</strong>: Monitor system uptime, response
+                  times, and load handling capabilities to ensure the platform is
+                  performing optimally.</p>
+              </li>
+              <li>
+                <p><strong>Multilingual Support Usage</strong>: Track the usage of different
+                  language options (English, Sinhala, Tamil) to ensure they are being
+                  utilized effectively.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_data_collection_methods">6.2. Data Collection Methods</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p><strong>Analytics Tools</strong>: Implement analytics tools to gather
+                  data on user interactions, system performance, and other key metrics.</p>
+              </li>
+              <li>
+                <p><strong>User Feedback</strong>: Regularly collect feedback through
+                  surveys, reviews, and direct communication channels.</p>
+              </li>
+              <li>
+                <p><strong>Performance Monitoring</strong>: Use monitoring tools to
+                  keep track of system performance metrics in real-time.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_post_production_review">6.3. Post-Production Review</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p><strong>Initial Review</strong>: Conduct an initial review after
+                  the first three months of deployment to assess the system&#8217;s
+                  performance and user adoption.</p>
+              </li>
+              <li>
+                <p><strong>Continuous Improvement</strong>: Establish a continuous improvement
+                  process based on user feedback and performance data to make iterative
+                  enhancements to the system.</p>
+              </li>
+              <li>
+                <p><strong>Stakeholder Meetings</strong>: Hold regular meetings with
+                  stakeholders to discuss the findings, address any issues, and plan
+                  for future improvements.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
